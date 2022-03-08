@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+<div class="header">
+  <span class="title">Admin Configuration</span>
+  <span class="user">AQA Admin</span>
+</div>
+<div class="kContent">
+  <h1 class="kTitle">Select bug categories to display</h1>
+  <div class="kContainer">
+    <p-radioButton name="bugs" value="no" [(ngModel)]="showBugs" label="No bugs - ready for production!"></p-radioButton>
+    <p-radioButton name="bugs" value="yes" [(ngModel)]="showBugs" label="Bugs"></p-radioButton>
+    <p-checkbox [disabled]="showBugs==='no'" name="categories" value="functionality" label="Functionality" [(ngModel)]="selectedBugs"></p-checkbox>
+    <p-checkbox [disabled]="showBugs==='no'" name="categories" value="graphics" label="Graphic design" [(ngModel)]="selectedBugs"></p-checkbox>
+    <p-checkbox [disabled]="showBugs==='no'" name="categories" value="ux" label="User experience" [(ngModel)]="selectedBugs"></p-checkbox>
+    <p-checkbox [disabled]="showBugs==='no'" name="categories" value="responsive" label="Responsiveness" [(ngModel)]="selectedBugs"></p-checkbox>
+    <p-checkbox [disabled]="showBugs==='no'" name="categories" value="devices" label="Cross-device compatability" [(ngModel)]="selectedBugs"></p-checkbox>
+    <p-checkbox [disabled]="showBugs==='no'" name="categories" value="browser" label="Cross-browser compatability" [(ngModel)]="selectedBugs"></p-checkbox>
+    <div class="kFooter">
+      <p-button class="kButtonBranded" label="Save" (onClick)="updateBugTypes(false)"></p-button>
+      <p-button class="kButtonBranded" label="Save & Reload App" (onClick)="updateBugTypes(true)"></p-button>
+    </div>
+    <div class="kLoader" *ngIf="!showBugs.length">
+      <div class="spinner-container">
+        <div class='spinner'><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
