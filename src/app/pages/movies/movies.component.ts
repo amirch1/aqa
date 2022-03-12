@@ -8,9 +8,21 @@ export type Movie = {
   description: string;
   plays: number;
   created: number;
+  duration: number;
   pid: string;
   uiconf: string;
-}
+  viewers: number;
+  avgCompletionRate: number;
+  owner: string;
+};
+
+export type Totals = {
+  entries: number;
+  plays: number;
+  viewers: number;
+  minutesViewed: number;
+  avgCompletionRate: number;
+} | null;
 
 @Component({
   selector: 'app-movies',
@@ -20,6 +32,7 @@ export type Movie = {
 export class MoviesComponent implements OnInit {
 
   public movies: Movie[] = [];
+  public totals: Totals = null;
 
   constructor(private moviesService: MoviesService) { }
 
@@ -27,6 +40,7 @@ export class MoviesComponent implements OnInit {
     this.moviesService.getMovies().pipe(first()).subscribe(
       result => {
         this.movies = result[0].entries;
+        this.totals = result[0].totals;
       },
       error => {
         console.error(`Error connecting to Firestore: ${error}`);
