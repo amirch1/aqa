@@ -5,16 +5,13 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigService {
+export class MoviesService {
 
   constructor(private firestore: AngularFirestore) {
   }
 
-  getConfig(): Observable<any> {
-    return this.firestore.collection('admin').valueChanges();
+  getMovies(): Observable<any> {
+    return this.firestore.collection('movies').valueChanges();
   }
 
-  setConfig(bugTypes: string[]): void {
-    this.firestore.collection('admin').doc('adminFields').set({bugTypes})
-  }
 }

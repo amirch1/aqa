@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from "../../services/config.service";
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { first } from 'rxjs/operators'
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-admin',
