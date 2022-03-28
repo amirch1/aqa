@@ -10,17 +10,20 @@ import { AppComponent } from './app.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { ConfigService } from "./services/config.service";
-import {RadioButtonModule} from 'primeng/radiobutton';
-import {CheckboxModule} from 'primeng/checkbox';
-import {ButtonModule} from 'primeng/button';
-import {ToastModule} from 'primeng/toast';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { TableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 import { FormsModule } from '@angular/forms';
+import { ThumbLoaderComponent } from "./pages/movies/thumb-loader/thumb-loader.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
-    MoviesComponent
+    MoviesComponent,
+    ThumbLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     RadioButtonModule,
     ButtonModule,
     ToastModule,
+    TableModule,
     CheckboxModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,

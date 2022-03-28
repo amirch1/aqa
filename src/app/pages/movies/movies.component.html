@@ -1,4 +1,129 @@
-<h1>Movies</h1>
-<ul *ngFor="let movie of movies">
-  <li>{{movie.name}}</li>
-</ul>
+<div class="header">
+  <span class="title">Management Console</span>
+</div>
+<div class="content">
+  <div class="totals">
+    <div class="total">
+      <div class="kMiniIcon purple"><i class="icon-small-video"></i></div>
+      <span class="value">{{totals?.entries | number: '1.0'}}</span>
+      <span class="label">Videos</span>
+    </div>
+    <div class="total">
+      <div class="kMiniIcon blue"><i class="icon-small-play"></i></div>
+      <span class="value">{{totals?.plays | number: '1.0'}}</span>
+      <span class="label">Plays</span>
+    </div>
+    <div class="total">
+      <div class="kMiniIcon green"><i class="icon-small-viewer-contributor"></i></div>
+      <span class="value">{{totals?.viewers | number: '1.0'}}</span>
+      <span class="label">Viewers</span>
+    </div>
+    <div class="total">
+      <div class="kMiniIcon orange"><i class="icon-small-time"></i></div>
+      <span class="value">{{totals?.minutesViewed | number: '1.2'}}</span>
+      <span class="label">Minutes Viewed</span>
+    </div>
+    <div class="total">
+      <div class="kMiniIcon lightgreen"><i class="icon-small-Completion-Rate"></i></div>
+      <span class="value">{{totals?.avgCompletionRate | number: '1.2'}}</span>
+      <span class="label">Avg. Completion Rate</span>
+    </div>
+  </div>
+
+  <div class="table">
+    <p-table [value]="movies"
+             [defaultSortOrder]="-1"
+             [sortOrder]="sortOrder"
+             [customSort]="true"
+             [sortField]="sortField"
+             (sortFunction)="onSortChanged($event)">
+      <ng-template pTemplate="header">
+        <tr class="kTopVideoHeader">
+          <th [ngStyle]="{'width': '155px', 'padding-left': '24px'}"></th>
+          <th [ngStyle]="{'width': '100%', 'padding-left': '12'}" pSortableColumn="name">
+            Name
+            <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="plays">
+            Plays
+            <p-sortIcon field="count_plays"></p-sortIcon>
+          </th>
+          <th>
+            Play distribution
+          </th>
+          <th pSortableColumn="viewers">
+            Viewers
+            <p-sortIcon field="viewers"></p-sortIcon>
+          </th>
+          <th pSortableColumn="minutesViewed">
+            Minutes viewed
+            <p-sortIcon field="minutesViewed"></p-sortIcon>
+          </th>
+          <th pSortableColumn="avgCompletionRate">
+            Avg. Completion Rate
+            <p-sortIcon field="avgCompletionRate"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-movie>
+        <tr class="kTopVideoRow">
+          <td [ngStyle]="{'width': '155px', 'padding-left': '24px'}">
+            <thumb-loader [thumbnailUrl]="'https://www.kaltura.com/p/'+movie['pid']+'/sp/'+movie['pid']+'00/thumbnail/entry_id/'+movie['id']+'/width/128/height/72'" [width]="128" [height]="72"></thumb-loader>
+          </td>
+          <td [ngStyle]="{'width': '100%', 'padding-left': 12}">
+            <div class="kTopVideoEntryColumn"
+                 (click)="drillDown(movie)">
+              <span class="kTableColumn kEntryName">{{movie['name']}}</span>
+              <div class="kEntryDetails">
+                <span class="kTableColumn">
+                  By: {{movie['owner']}}
+                </span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="kTableCell">
+              <i class="icon-small-play"></i>
+              <span class="kCellValue">{{movie['plays']}}</span>&nbsp;
+            </div>
+          </td>
+          <td>
+            <div class="kTableCell">
+              <span class="kCellValue">{{movie['plays']}}</span>&nbsp;
+            </div>
+          </td>
+          <td>
+            <div class="kTableCell">
+              <i class="icon-small-viewer-contributor"></i>
+              <span class="kCellValue">{{movie['viewers']}}</span>&nbsp;
+            </div>
+          </td>
+          <td>
+            <div class="kTableCell">
+              <i class="icon-small-time"></i>
+              <span class="kCellValue">{{movie['minutesViewed']}}</span>&nbsp;
+            </div>
+          </td>
+          <td>
+            <div class="kTableCell">
+              <i class="icon-small-Completion-Rate"></i>
+              <span class="kCellValue">{{movie['avgCompletionRate']}}</span>&nbsp;
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <div class="emptymessage">
+          <div class="kEmptyMessage">Mo Movies Found</div>
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<div class="kLoader" *ngIf="isBusy">
+  <div class="spinner-container">
+    <div class='spinner'><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+</div>
+

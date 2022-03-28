@@ -189,3 +189,204 @@
     color: white;
   }
 }
+/* data table */
+p-table {
+  .p-datatable-tbody > tr > td {
+    height: 70px;
+    overflow: hidden;
+    border: 1px solid #d9d9d9;
+    border-left: none;
+    border-right: none;
+  }
+  .p-datatable-tbody > tr:not(.kEmptymessageBorder):hover{
+    background-color: $kGrayscale7;
+  }
+  .p-datatable-scrollable-header {
+    background: transparent;
+    height: 32px;
+    border: 1px solid #d9d9d9;
+    color: white;
+    font-weight: 700;
+    border-left: none;
+    border-right: none;
+    tr {
+      height: 32px;
+    }
+  }
+  .p-datatable-thead > tr > th {
+    border-left: none;
+    border-right: none;
+    font-weight: normal;
+    text-align: left;
+    border: none;
+    padding-left: 8px;
+    padding-right: 4px;
+    box-sizing: border-box;
+    background: transparent;
+    color: $kGrayscale3;
+    font-size: 14px;
+    outline: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .p-datatable-scrollable-header-box {
+    padding-right: 0px !important;
+  }
+  .p-datatable-scrollable-header-box.stickyHeader {
+    z-index: 10;
+    display: table;
+    background-color: white;
+    border-bottom: 1px solid $kGrayscale5;
+  }
+  .p-datatable-thead > tr > th.p-highlight {
+    color: $kGrayscale1;
+    p-sorticon{
+      display: inline;
+    }
+  }
+  .p-datatable-thead > tr > th.p-sortable-column {
+    cursor: pointer;
+  }
+
+  .p-datatable-sort-icon {
+    vertical-align: initial;
+  }
+
+  .p-sortable-column-icon {
+    vertical-align: initial !important;
+  }
+
+  .p-datatable-tbody > tr > td {
+    font-size: 15px;
+    font-weight: 400;
+    color: $kGrayscale3;
+    text-overflow: ellipsis;
+    padding-left: 8px;
+    padding-right: 4px;
+    box-sizing: border-box;
+  }
+  p-sorticon{
+    display: none;
+    a{
+      text-decoration: none !important;
+    }
+    i{
+      font-size: 10px;
+      margin-left: 8px;
+      visibility: visible;
+    }
+  }
+  .p-datatable-data > tr > td {
+    border: 0px solid #ffffff;
+    overflow: hidden;
+  }
+  .p-datatable-scrollable-body {
+    max-height: none !important;
+    overflow-y: auto !important;
+  }
+  .p-datatable-scrollable-body>table>.p-datatable-tbody>tr:first-child>td{
+    border-top: 1px solid white;
+  }
+  .p-datatable-scrollable-footer {
+    border: none !important;
+  }
+  .emptymessage{
+    text-align: center;
+    line-height: 200px;
+    font-size: 28px;
+    color: $kGrayscale3;
+  }
+
+  .p-datatable-data tr.uploadFailure {
+    background: lighten($kDandger, 45%);
+  }
+
+  .p-datatable-data tr.uploading {
+    background: repeating-linear-gradient(
+        -75deg,
+        #ffffff,
+        #ffffff 15px,
+        $kGrayscale7 15px,
+        $kGrayscale7 30px
+    );
+    background-attachment: fixed;
+
+    -webkit-animation: progress 2s linear infinite;
+    -moz-animation: progress 2s linear infinite;
+    -ms-animation: progress 2s linear infinite;
+    animation: progress 2s linear infinite;
+  }
+
+  .p-datatable-tbody tr.uploadFailure {
+    background: lighten($kDandger, 45%);
+  }
+
+  .p-datatable-tbody tr.uploading {
+    background: repeating-linear-gradient(
+        -75deg,
+        #ffffff,
+        #ffffff 15px,
+        $kGrayscale7 15px,
+        $kGrayscale7 30px
+    );
+    background-attachment: fixed;
+
+    -webkit-animation: progress 2s linear infinite;
+    -moz-animation: progress 2s linear infinite;
+    -ms-animation: progress 2s linear infinite;
+    animation: progress 2s linear infinite;
+  }
+
+  .p-datatable-tbody .pi-chevron-circle-right {
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-left: 12px solid $kGrayscale4;
+    border-bottom: 8px solid transparent;
+  }
+
+  .p-datatable-tbody .pi-chevron-circle-down {
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid $kGrayscale4;
+    margin-left: -3px;
+  }
+}
+
+@-webkit-keyframes progress{
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -60px 0px;
+  }
+}
+@-moz-keyframes progress{
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -60px 0px;
+  }
+}
+@-ms-keyframes progress{
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -60px 0px;
+  }
+}
+@keyframes progress{
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -60px 0px;
+  }
+}

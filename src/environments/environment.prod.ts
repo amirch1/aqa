@@ -1,5 +1,9 @@
 export const environment = {
   production: true,
+  kalturaServer: {
+    uri : "www.kaltura.com",
+    previewUIConf:49721233
+  },
   firebase: {
     apiKey: "AIzaSyCga_L-ylUuM1ZUZw7LwevoY1xvK4uH4FU",
     authDomain: "aqa-app-72e50.firebaseapp.com",

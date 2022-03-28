@@ -12,6 +12,10 @@
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
 export const environment = {
   production: false,
+  kalturaServer: {
+    uri : "www.kaltura.com",
+    previewUIConf:49721233
+  },
   firebase: {
     apiKey: "AIzaSyCga_L-ylUuM1ZUZw7LwevoY1xvK4uH4FU",
     authDomain: "aqa-app-72e50.firebaseapp.com",
