@@ -15,15 +15,18 @@ import { TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { MenuModule } from 'primeng/menu';
 import { FormsModule } from '@angular/forms';
 import { ThumbLoaderComponent } from "./pages/movies/thumb-loader/thumb-loader.component";
+import { BulletComponent } from "./pages/movies/bullet/bullet.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     MoviesComponent,
-    ThumbLoaderComponent
+    ThumbLoaderComponent,
+    BulletComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { ThumbLoaderComponent } from "./pages/movies/thumb-loader/thumb-loader.c
     AppRoutingModule,
     RadioButtonModule,
     ButtonModule,
+    MenuModule,
     ToastModule,
     TableModule,
     CheckboxModule,

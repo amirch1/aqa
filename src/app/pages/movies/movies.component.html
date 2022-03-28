@@ -33,20 +33,18 @@
   <div class="table">
     <p-table [value]="movies"
              [defaultSortOrder]="-1"
-             [sortOrder]="sortOrder"
-             [customSort]="true"
-             [sortField]="sortField"
-             (sortFunction)="onSortChanged($event)">
+             [sortOrder]="-1"
+             [sortField]="'plays'">
       <ng-template pTemplate="header">
         <tr class="kTopVideoHeader">
           <th [ngStyle]="{'width': '155px', 'padding-left': '24px'}"></th>
-          <th [ngStyle]="{'width': '100%', 'padding-left': '12'}" pSortableColumn="name">
+          <th [ngStyle]="{'width': '100%', 'padding-left': '24'}" pSortableColumn="name">
             Name
             <p-sortIcon field="name"></p-sortIcon>
           </th>
           <th pSortableColumn="plays">
             Plays
-            <p-sortIcon field="count_plays"></p-sortIcon>
+            <p-sortIcon field="plays"></p-sortIcon>
           </th>
           <th>
             Play distribution
@@ -60,9 +58,10 @@
             <p-sortIcon field="minutesViewed"></p-sortIcon>
           </th>
           <th pSortableColumn="avgCompletionRate">
-            Avg. Completion Rate
+            <span>Avg. Completion Rate</span>
             <p-sortIcon field="avgCompletionRate"></p-sortIcon>
           </th>
+          <th [ngStyle]="{'width':'80px'}"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-movie>
@@ -70,9 +69,8 @@
           <td [ngStyle]="{'width': '155px', 'padding-left': '24px'}">
             <thumb-loader [thumbnailUrl]="'https://www.kaltura.com/p/'+movie['pid']+'/sp/'+movie['pid']+'00/thumbnail/entry_id/'+movie['id']+'/width/128/height/72'" [width]="128" [height]="72"></thumb-loader>
           </td>
-          <td [ngStyle]="{'width': '100%', 'padding-left': 12}">
-            <div class="kTopVideoEntryColumn"
-                 (click)="drillDown(movie)">
+          <td [ngStyle]="{'width': '100%', 'padding-left': 24}">
+            <div class="kTopVideoEntryColumn" (click)="drillDown(movie)">
               <span class="kTableColumn kEntryName">{{movie['name']}}</span>
               <div class="kEntryDetails">
                 <span class="kTableColumn">
@@ -89,7 +87,7 @@
           </td>
           <td>
             <div class="kTableCell">
-              <span class="kCellValue">{{movie['plays']}}</span>&nbsp;
+              <app-bullet [value]="movie['playsDistribution']"></app-bullet>
             </div>
           </td>
           <td>
@@ -101,13 +99,18 @@
           <td>
             <div class="kTableCell">
               <i class="icon-small-time"></i>
-              <span class="kCellValue">{{movie['minutesViewed']}}</span>&nbsp;
+              <span class="kCellValue">{{movie['minutesViewed']  | number: '1.2'}}</span>&nbsp;
             </div>
           </td>
           <td>
             <div class="kTableCell">
               <i class="icon-small-Completion-Rate"></i>
               <span class="kCellValue">{{movie['avgCompletionRate']}}</span>&nbsp;
+            </div>
+          </td>
+          <td  [ngStyle]="{'width':'80px'}">
+            <div class="tableRowActions">
+              <button type="button" pButton class="kMoreActionsButton" label="•••" (click)="openActionsMenu($event, movie)"></button>
             </div>
           </td>
         </tr>
@@ -127,3 +130,4 @@
   </div>
 </div>
 
+<p-menu #actionsmenu [popup]="true" [model]="actions" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>

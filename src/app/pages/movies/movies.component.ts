@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MoviesService } from "../../services/movies.service";
 import { first } from "rxjs/operators";
-import {SortEvent} from "primeng/api";
+import { Menu } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
 
 export type Movie = {
   id: string;
   name: string;
   description: string;
   plays: number;
+  playsDistribution: number;
   created: number;
   duration: number;
   pid: string;
@@ -32,13 +34,18 @@ export type Totals = {
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
+  @ViewChild('actionsmenu', { static: true }) private actionsMenu: Menu | undefined;
 
   public movies: Movie[] = [];
   public totals: Totals = null;
   public isBusy = false;
 
-  public sortField = 'plays';
-  public sortOrder = -1;
+  public actions: MenuItem[] = [
+    {label: 'View Details', command: (event) => {this.actionSelected("view");}},
+    {label: 'Delete', styleClass: 'kDanger', command: (event) => {this.actionSelected("delete");}}
+  ];
+
+  private selectedMovie: Movie | null = null;
 
   constructor(private moviesService: MoviesService) { }
 
@@ -48,6 +55,9 @@ export class MoviesComponent implements OnInit {
       result => {
         this.movies = result[0].entries;
         this.totals = result[0].totals;
+        // update plays distribution
+        // @ts-ignore
+        this.movies.forEach(movie => movie.playsDistribution = Number((movie.plays / this.totals.plays * 100).toFixed(2)));
         this.isBusy = false;
       },
       error => {
@@ -55,17 +65,28 @@ export class MoviesComponent implements OnInit {
       });
   }
 
-  public onSortChanged(event: SortEvent): void {
-    if (event.data && event.data.length && event.field && event.order) {
-      const order = event.order === 1 ? '+' + event.field : '-' + event.field;
-      if (order !== this.sortField) {
-        this.sortField = order;
-      }
+  openActionsMenu(event: any, movie: Movie): void{
+    if (this.actionsMenu){
+      this.selectedMovie = movie;
+      this.actionsMenu.toggle(event);
     }
   }
 
-  public drillDown(video: Movie): void {
+  private actionSelected(action: string): void{
+    switch (action){
+      case "delete":
+        alert("delete");
+        break;
+      case "view":
+        this.drillDown(this.selectedMovie);
+        break;
+    }
+  }
 
+  public drillDown(movie: Movie | null): void {
+    if (movie) {
+      alert("Drill down to movie: " + movie.name);
+    }
   }
 
 }
