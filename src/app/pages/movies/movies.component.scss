@@ -79,6 +79,7 @@
     width: 100%;
     background-color: white;
     margin-top: 24px;
+    margin-bottom: 24px;
     .kTopVideoHeader {
       height: 42px;
     }
@@ -89,7 +90,7 @@
       display: flex;
       flex-direction: column;
       font-weight: bold;
-      margin-top: -28px;
+      height: 76px;
       .kEntryName {
         cursor: pointer;
         font-size: 18px;
@@ -103,6 +104,12 @@
         font-weight: bold;
         color: $kGrayscale3;
       }
+    }
+    .tableHeader {
+      white-space: pre-wrap;
+    }
+    .playsDistributionCol {
+      width: 20%;
     }
     .tableRowActions {
       width: 100%;
@@ -152,6 +159,12 @@
     padding-left: 60px;
     padding-right: 60px;
   }
+  .playsDistributionCol {
+    width: 12% !important;
+  }
+  app-bullet ::ng-deep .kBullet {
+    display: none;
+  }
 }
 .kLoader {
   position: absolute;
@@ -163,4 +176,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+p-table ::ng-deep .p-datatable table {
+  width: 100%;
 }

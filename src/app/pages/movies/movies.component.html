@@ -38,27 +38,27 @@
       <ng-template pTemplate="header">
         <tr class="kTopVideoHeader">
           <th [ngStyle]="{'width': '155px', 'padding-left': '24px'}"></th>
-          <th [ngStyle]="{'width': '100%', 'padding-left': '24'}" pSortableColumn="name">
-            Name
+          <th [ngStyle]="{'width': '35%', 'padding-left': '24'}" pSortableColumn="name">
+            <span class="tableHeader">Name</span>
             <p-sortIcon field="name"></p-sortIcon>
           </th>
-          <th pSortableColumn="plays">
-            Plays
+          <th [ngStyle]="{'width': '10%'}" pSortableColumn="plays">
+            <span class="tableHeader">Plays</span>
             <p-sortIcon field="plays"></p-sortIcon>
           </th>
-          <th>
-            Play distribution
+          <th class="playsDistributionCol">
+            <span class="tableHeader">Play distribution</span>
           </th>
-          <th pSortableColumn="viewers">
-            Viewers
+          <th [ngStyle]="{'width': '10%'}" pSortableColumn="viewers">
+            <span class="tableHeader">Viewers</span>
             <p-sortIcon field="viewers"></p-sortIcon>
           </th>
-          <th pSortableColumn="minutesViewed">
-            Minutes viewed
+          <th [ngStyle]="{'width': '15%'}" pSortableColumn="minutesViewed">
+            <span class="tableHeader">Minutes viewed</span>
             <p-sortIcon field="minutesViewed"></p-sortIcon>
           </th>
-          <th pSortableColumn="avgCompletionRate">
-            <span>Avg. Completion Rate</span>
+          <th [ngStyle]="{'width': '10%'}" pSortableColumn="avgCompletionRate">
+            <span class="tableHeader">Avg. Completion Rate</span>
             <p-sortIcon field="avgCompletionRate"></p-sortIcon>
           </th>
           <th [ngStyle]="{'width':'80px'}"></th>
