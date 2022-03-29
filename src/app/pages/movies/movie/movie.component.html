@@ -1,0 +1,36 @@
+<div class="cover" [ngClass]="{'show': _show, 'closing': closing}"></div>
+<div class="movieContainer" [class.show]="_show">
+  <div class="movieFrame">
+    <iframe *ngIf="showMovie" type="text/javascript" [src]="src" style="width: 742px; height: 420px" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0"></iframe>
+  </div>
+  <div class="rows">
+    <div class="row">
+      <span class="label">Created By</span>
+      <span class="value">{{_movie?.owner}}</span>
+    </div>
+    <div class="row">
+      <span class="label">ID</span>
+      <span class="value id">{{_movie?.id}}</span>
+    </div>
+    <div class="row">
+      <div class="requiredLabel">
+        <span class="label">Name</span>
+        <span class="req">*</span>
+      </div>
+      <div class="inputWithError">
+        <input type="text" pInputText [(ngModel)]="movieName"/>
+        <span *ngIf="!movieName.length" class="error">This field is required</span>
+      </div>
+    </div>
+    <div class="row high">
+      <span class="label">Description</span>
+      <textarea pInputTextarea [(ngModel)]="description"></textarea>
+    </div>
+  </div>
+  <div class="footer">
+    <button class="kButtonDanger" type="button" pButton label="Delete" (click)="delete()"></button>
+    <button class="kButtonDefault" type="button" pButton label="Cancel" (click)="close()"></button>
+    <button class="kButtonBranded" [disabled]="!movieName.length" type="button" pButton label="Save" (click)="save()"></button>
+  </div>
+
+</div>

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MoviesService } from "../../services/movies.service";
 import { first } from "rxjs/operators";
 import { Menu } from 'primeng/menu';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, ConfirmationService } from 'primeng/api';
 
 export type Movie = {
   id: string;
@@ -13,7 +13,6 @@ export type Movie = {
   created: number;
   duration: number;
   pid: string;
-  uiconf: string;
   viewers: number;
   avgCompletionRate: number;
   minutesViewed: number;
@@ -31,7 +30,8 @@ export type Totals = {
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.scss']
+  styleUrls: ['./movies.component.scss'],
+  providers: [ConfirmationService]
 })
 export class MoviesComponent implements OnInit {
   @ViewChild('actionsmenu', { static: true }) private actionsMenu: Menu | undefined;
@@ -45,9 +45,11 @@ export class MoviesComponent implements OnInit {
     {label: 'Delete', styleClass: 'kDanger', command: (event) => {this.actionSelected("delete");}}
   ];
 
-  private selectedMovie: Movie | null = null;
+  public showMovieDetails = false;
+  public selectedMovie: Movie | null = null;
 
-  constructor(private moviesService: MoviesService) { }
+  constructor(private moviesService: MoviesService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.isBusy = true;
@@ -75,7 +77,7 @@ export class MoviesComponent implements OnInit {
   private actionSelected(action: string): void{
     switch (action){
       case "delete":
-        alert("delete");
+        this.delete();
         break;
       case "view":
         this.drillDown(this.selectedMovie);
@@ -85,7 +87,16 @@ export class MoviesComponent implements OnInit {
 
   public drillDown(movie: Movie | null): void {
     if (movie) {
-      alert("Drill down to movie: " + movie.name);
+      this.selectedMovie = movie;
+      this.showMovieDetails = true;
+    }
+  }
+
+  public delete(): void {
+    // @ts-ignore
+    this.movies = this.movies.filter(movie => movie.id !== this.selectedMovie.id);
+    if (this.showMovieDetails) {
+      this.showMovieDetails = false; // close details window if open
     }
   }
 

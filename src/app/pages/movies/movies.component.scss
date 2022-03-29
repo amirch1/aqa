@@ -152,6 +152,10 @@
         font-weight: bold;
       }
     }
+    .kEmptyMessage {
+      white-space: nowrap;
+      margin-left: 100px;
+    }
   }
 }
 @media (max-width: 1200px) {
@@ -180,3 +184,4 @@
 p-table ::ng-deep .p-datatable table {
   width: 100%;
 }
+

@@ -117,7 +117,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <div class="emptymessage">
-          <div class="kEmptyMessage">Mo Movies Found</div>
+          <div class="kEmptyMessage">No Movies Found</div>
         </div>
       </ng-template>
     </p-table>
@@ -131,3 +131,6 @@
 </div>
 
 <p-menu #actionsmenu [popup]="true" [model]="actions" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+
+<app-movie [movie]="selectedMovie" [show]="showMovieDetails" (onClose)="showMovieDetails=false" (onDelete)="delete()"></app-movie>
+
