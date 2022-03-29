@@ -152,9 +152,11 @@
         font-weight: bold;
       }
     }
-    .kEmptyMessage {
-      white-space: nowrap;
-      margin-left: 100px;
+    .emptymessage {
+      width: calc(100vw - 240px);
+      .kEmptyMessage {
+        white-space: nowrap;
+      }
     }
   }
 }
@@ -162,6 +164,9 @@
   .content {
     padding-left: 60px;
     padding-right: 60px;
+  }
+  .emptymessage {
+    width: calc(100vw - 120px) !important;
   }
   .playsDistributionCol {
     width: 12% !important;

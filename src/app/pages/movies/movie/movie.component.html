@@ -24,13 +24,16 @@
     </div>
     <div class="row high">
       <span class="label">Description</span>
-      <textarea pInputTextarea [(ngModel)]="description"></textarea>
+      <div class="inputWithError">
+        <textarea pInputTextarea [(ngModel)]="description"></textarea>
+        <span *ngIf="description.length > 200" class="error">Max 200 characters</span>
+      </div>
     </div>
   </div>
   <div class="footer">
     <button class="kButtonDanger" type="button" pButton label="Delete" (click)="delete()"></button>
     <button class="kButtonDefault" type="button" pButton label="Cancel" (click)="close()"></button>
-    <button class="kButtonBranded" [disabled]="!movieName.length" type="button" pButton label="Save" (click)="save()"></button>
+    <button class="kButtonBranded" [disabled]="!movieName.length || description.length > 200" type="button" pButton label="Save" (click)="save()"></button>
   </div>
 
 </div>
