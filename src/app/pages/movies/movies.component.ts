@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MoviesService } from "../../services/movies.service";
 import { first } from "rxjs/operators";
 import { Menu } from 'primeng/menu';
-import { MenuItem, ConfirmationService } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
+import { Router } from "@angular/router";
 
 export type Movie = {
   id: string;
@@ -30,8 +31,7 @@ export type Totals = {
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.scss'],
-  providers: [ConfirmationService]
+  styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
   @ViewChild('actionsmenu', { static: true }) private actionsMenu: Menu | undefined;
@@ -39,6 +39,7 @@ export class MoviesComponent implements OnInit {
   public movies: Movie[] = [];
   public totals: Totals = null;
   public isBusy = false;
+  public isAdmin = false;
 
   public actions: MenuItem[] = [
     {label: 'View Details', command: (event) => {this.actionSelected("view");}},
@@ -46,13 +47,15 @@ export class MoviesComponent implements OnInit {
   ];
 
   public showMovieDetails = false;
+  public showSettings = false;
   public selectedMovie: Movie | null = null;
 
   constructor(private moviesService: MoviesService,
-              private confirmationService: ConfirmationService) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.isBusy = true;
+    this.isAdmin = sessionStorage.getItem('aqaUser') === 'aqa_admin';
     this.moviesService.getMovies().pipe(first()).subscribe(
       result => {
         this.movies = result[0].entries;
@@ -98,6 +101,15 @@ export class MoviesComponent implements OnInit {
     if (this.showMovieDetails) {
       this.showMovieDetails = false; // close details window if open
     }
+  }
+
+  public openSettings(): void {
+    this.showSettings = true;
+  }
+
+  public logout():void {
+    sessionStorage.removeItem('aqaUser');
+    this.router.navigateByUrl('/login');
   }
 
 }

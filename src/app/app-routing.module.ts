@@ -1,12 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AdminComponent} from "./pages/admin/admin.component";
 import {MoviesComponent} from "./pages/movies/movies.component";
+import {LoginComponent} from "./pages/login/login.component";
+import {MoviesCanActivate} from "./gaurds/movies-can-activate";
 
 const routes: Routes = [
-  {path: 'movies', component: MoviesComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: '**', redirectTo: '/movies'}
+  {path: 'login', component: LoginComponent},
+  {path: 'movies', component: MoviesComponent, canActivate: [MoviesCanActivate]},
+  {path: '**', redirectTo: '/login'}
 ];
 
 @NgModule({

@@ -1,0 +1,10 @@
+<div class="login">
+  <div class="loginForm">
+    <span class="title">Management Console</span>
+    <span class="label">Log In</span>
+    <input type="text" pInputText [(ngModel)]="username" [placeholder]="'User Name'"/>
+    <input type="password" pInputText [(ngModel)]="password" [placeholder]="'Password'" (keydown)="onKeyDown($event)"/>
+    <button class="kButtonBranded" type="button" pButton label="Log In" (click)="login()"></button>
+    <span *ngIf="error.length" class="error">{{error}}</span>
+  </div>
+</div>

@@ -17,18 +17,22 @@ import { ToastModule } from 'primeng/toast';
 import { MenuModule } from 'primeng/menu';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FormsModule } from '@angular/forms';
 import { ThumbLoaderComponent } from "./pages/movies/thumb-loader/thumb-loader.component";
 import { BulletComponent } from "./pages/movies/bullet/bullet.component";
 import { MovieComponent } from "./pages/movies/movie/movie.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { MoviesCanActivate } from "./gaurds/movies-can-activate";
+import { SettingsComponent } from "./pages/settings/settings.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     AdminComponent,
     MoviesComponent,
     ThumbLoaderComponent,
+    SettingsComponent,
     BulletComponent,
     MovieComponent
   ],
@@ -38,7 +42,6 @@ import { MovieComponent } from "./pages/movies/movie/movie.component";
     FormsModule,
     AppRoutingModule,
     RadioButtonModule,
-    ConfirmDialogModule,
     InputTextModule,
     InputTextareaModule,
     ButtonModule,
@@ -50,7 +53,7 @@ import { MovieComponent } from "./pages/movies/movie/movie.component";
     AngularFireAnalyticsModule,
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [MoviesCanActivate],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

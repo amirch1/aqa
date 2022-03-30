@@ -1,5 +1,7 @@
 <div class="header">
   <span class="title">Management Console</span>
+  <i *ngIf="isAdmin" (click)="openSettings()" class="settingsIcon"></i>
+  <span class="logout" [class.user]="!isAdmin" (click)="logout()">Logout</span>
 </div>
 <div class="content">
   <div class="totals">
@@ -134,3 +136,4 @@
 
 <app-movie [movie]="selectedMovie" [show]="showMovieDetails" (onClose)="showMovieDetails=false" (onDelete)="delete()"></app-movie>
 
+<app-settings [show]="showSettings" (onClose)="showSettings=false"></app-settings>
