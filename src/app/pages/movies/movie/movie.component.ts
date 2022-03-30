@@ -21,6 +21,10 @@ export class MovieComponent {
   @Input() set show(value: boolean) {
     this._show = value;
     if (value) {
+      if (this._movie) {
+        this.movieName = this._movie.name;
+        this.description = this._movie.description;
+      }
       setTimeout(() => {
         this.showMovie = true;
       }, 500);
