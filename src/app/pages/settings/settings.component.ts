@@ -13,6 +13,7 @@ export class SettingsComponent implements OnInit{
 
   @Input() set show(value: boolean) {
     this._show = value;
+    this.loadSettings();
     if (value) {
       setTimeout(() => {
         this.showSettings = true;
@@ -34,7 +35,7 @@ export class SettingsComponent implements OnInit{
 
   }
 
-  ngOnInit(): void {
+  private loadSettings(): void {
     this.configService.getConfig().pipe(first()).subscribe(
       result => {
         this.showBugs = result[0].bugTypes && result[0].bugTypes.length ? 'yes' : 'no';
@@ -43,6 +44,10 @@ export class SettingsComponent implements OnInit{
       error => {
         console.error(`Error connecting to Firestore: ${error}`);
       });
+  }
+
+  ngOnInit(): void {
+    this.loadSettings();
   }
 
   public close(): void {
@@ -58,7 +63,7 @@ export class SettingsComponent implements OnInit{
     this.close();
     const bugTypes = this.showBugs === 'yes' ? this.selectedBugs : [];
     this.configService.setConfig(bugTypes);
-    this.messageService.add({severity:'success', detail:'Changes Saved',  closable: false, life: 2500});
+    this.messageService.add({severity:'success', detail:'Changes Saved, reloading page...',  closable: false, life: 2500});
     setTimeout(() => {
       window.location.reload();
     }, 3000);
