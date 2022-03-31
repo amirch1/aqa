@@ -96,6 +96,9 @@
         font-family: Lato;
       }
     }
+    .inputError {
+      border: 1px solid $kDandger;
+    }
     .inputWithError {
       display: flex;
       flex-direction: column;

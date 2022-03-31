@@ -18,14 +18,14 @@
         <span class="req">*</span>
       </div>
       <div class="inputWithError">
-        <input type="text" pInputText [(ngModel)]="movieName"/>
+        <input type="text" pInputText [(ngModel)]="movieName" [class.inputError]="!movieName.length"/>
         <span *ngIf="!movieName.length" class="error">This field is required</span>
       </div>
     </div>
     <div class="row high">
       <span class="label">Description</span>
       <div class="inputWithError">
-        <textarea pInputTextarea [(ngModel)]="description"></textarea>
+        <textarea pInputTextarea [(ngModel)]="description" [class.inputError]="description.length > 200"></textarea>
         <span *ngIf="description.length > 200" class="error">Max 200 characters</span>
       </div>
     </div>
