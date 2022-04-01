@@ -23,6 +23,7 @@ import { MovieComponent } from "./pages/movies/movie/movie.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { MoviesCanActivate } from "./gaurds/movies-can-activate";
 import { SettingsComponent } from "./pages/settings/settings.component";
+import { DurationPipe } from "./pipes/duration.pipe";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SettingsComponent } from "./pages/settings/settings.component";
     ThumbLoaderComponent,
     SettingsComponent,
     BulletComponent,
-    MovieComponent
+    MovieComponent,
+    DurationPipe
   ],
   imports: [
     BrowserModule,

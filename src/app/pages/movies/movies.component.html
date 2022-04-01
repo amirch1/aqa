@@ -68,8 +68,9 @@
       </ng-template>
       <ng-template pTemplate="body" let-movie>
         <tr class="kTopVideoRow">
-          <td [ngStyle]="{'width': '155px', 'padding-left': '24px'}">
+          <td [ngStyle]="{'width': '155px', 'padding-left': '24px', 'position': 'relative'}">
             <thumb-loader [thumbnailUrl]="'https://www.kaltura.com/p/'+movie['pid']+'/sp/'+movie['pid']+'00/thumbnail/entry_id/'+movie['id']+'/width/128/height/72'" [width]="128" [height]="72"></thumb-loader>
+            <span class="duration">{{movie['duration'] | duration}}</span>
           </td>
           <td [ngStyle]="{'width': '100%', 'padding-left': 24}">
             <div class="kTopVideoEntryColumn" (click)="drillDown(movie)">

@@ -105,6 +105,17 @@
     .kTopVideoRow {
       height: 100px;
     }
+    .duration {
+      position: absolute;
+      left: 27px;
+      bottom: 17px;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      background-color: rgba(0,0,0,0.6);
+      padding: 2px 4px 2px 4px;
+      border-radius: 3px;
+    }
     .kTopVideoEntryColumn {
       display: flex;
       flex-direction: column;
