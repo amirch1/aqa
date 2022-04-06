@@ -27,6 +27,7 @@
     height: 100%;
   }
 }
+
 .movieContainer {
   transition: top 500ms ease-in;
   width: 790px;
@@ -38,21 +39,26 @@
   border-radius: 8px 8px 0px 0px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 24px 24px 24px 24px;
   box-sizing: border-box;
   &.show {
     top: 40px;
   }
   .movieFrame {
+    flex: 1 1 auto;
     width: 742px;
     height: 420px;
+    max-width: 742px;
+    max-height: 420px;
     background-color: black;
     border-radius: 4px;
     overflow: hidden;
   }
   .rows {
-    height: calc(100vh - 586px);
-    overflow-y: auto;
+    flex: 0 0 auto;
+    height: 346px;
+    overflow-y: hidden;
     overflow-x: hidden;
     .row {
       margin-top: 24px;
@@ -132,6 +138,41 @@
       &.kButtonBranded {
         margin-right: 24px;
       }
+    }
+  }
+}
+@media screen and (max-height: 820px) {
+  .movieContainer {
+    .movieFrame {
+      width: 600px;
+    }
+  }
+}
+@media screen and (max-height: 700px) {
+  .movieContainer {
+    .movieFrame {
+      width: 460px;
+    }
+  }
+}
+@media screen and (max-height: 600px) {
+  .movieContainer {
+    .movieFrame {
+      width: 280px;
+    }
+  }
+}
+@media screen and (max-height: 550px) {
+  .movieContainer {
+    .movieFrame {
+      width: 160px;
+    }
+  }
+}
+@media screen and (max-height: 500px) {
+  .movieContainer {
+    .movieFrame {
+      display: none;
     }
   }
 }

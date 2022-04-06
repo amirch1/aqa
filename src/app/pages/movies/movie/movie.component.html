@@ -1,7 +1,7 @@
 <div class="cover" [ngClass]="{'show': _show, 'closing': closing}"></div>
 <div class="movieContainer" [class.show]="_show">
   <div class="movieFrame">
-    <iframe *ngIf="showMovie" type="text/javascript" [src]="src" style="width: 742px; height: 420px" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0"></iframe>
+    <iframe *ngIf="showMovie" type="text/javascript" [src]="src" style="width: 100%; height: 100%" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0"></iframe>
   </div>
   <div class="rows">
     <div class="row">
