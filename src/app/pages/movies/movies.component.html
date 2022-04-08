@@ -73,8 +73,8 @@
             <span class="duration">{{movie['duration'] | duration}}</span>
           </td>
           <td [ngStyle]="{'width': '100%', 'padding-left': 24}">
-            <div class="kTopVideoEntryColumn" (click)="drillDown(movie)">
-              <span class="kTableColumn kEntryName">{{movie['name']}}</span>
+            <div class="kTopVideoEntryColumn">
+              <span class="kTableColumn kEntryName" (click)="drillDown(movie)">{{movie['name']}}</span>
               <div class="kEntryDetails">
                 <span class="kTableColumn">
                   By: {{movie['owner']}}
