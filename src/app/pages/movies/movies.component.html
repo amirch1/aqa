@@ -73,8 +73,8 @@
             <span *ngIf="showDuration" class="duration">{{movie['duration'] | duration}}</span>
           </td>
           <td [ngStyle]="{'width': '100%', 'padding-left': 24}">
-            <div class="kTopVideoEntryColumn" (click)="drillDown(movie, true)">
-              <span class="kTableColumn kEntryName" [ngClass]="{'uxBug': bugs && bugs.indexOf('ux') !== -1, 'graphicsBug': bugs && bugs.indexOf('graphics') !== -1}">{{movie['name']}}</span>
+            <div class="kTopVideoEntryColumn">
+              <span class="kTableColumn kEntryName" (click)="drillDown(movie, true)" [ngClass]="{'uxBug': bugs && bugs.indexOf('ux') !== -1, 'graphicsBug': bugs && bugs.indexOf('graphics') !== -1}">{{movie['name']}}</span>
               <div class="kEntryDetails">
                 <span class="kTableColumn">
                   By: {{movie['owner']}}
