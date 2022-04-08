@@ -81,6 +81,10 @@
           background-color: rgba(225,150,46,0.2);
           color: #E1962E;
         }
+        &.aqua {
+          background-color: rgba(22, 168, 215, 0.2);
+          color: #16a8d7;
+        }
       }
       .value{
         font-size: 24px;
@@ -104,6 +108,9 @@
     }
     .kTopVideoRow {
       height: 100px;
+      &.graphicsBug:hover {
+        background-color: $kGrayscale4;
+      }
     }
     .duration {
       position: absolute;
@@ -127,6 +134,12 @@
         font-weight: bold;
         color: $kGrayscale1;
         margin-bottom: 4px;
+        &.uxBug {
+          cursor: text;
+        }
+        &.graphicsBug {
+          font-family: "Arial Black";
+        }
       }
 
       .kEntryDetails {
@@ -192,7 +205,7 @@
 }
 
 @media (max-width: 1200px) {
-  .content {
+  .content:not(.responsiveBug) {
     padding-left: 60px;
     padding-right: 60px;
   }
@@ -202,7 +215,7 @@
   .playsDistributionCol {
     width: 12% !important;
   }
-  app-bullet ::ng-deep .kBullet {
+  app-bullet:not(.responsiveBug) ::ng-deep .kBullet {
     display: none;
   }
 }
@@ -220,4 +233,3 @@
 p-table ::ng-deep .p-datatable table {
   width: 100%;
 }
-

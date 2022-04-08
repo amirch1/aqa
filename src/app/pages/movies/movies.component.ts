@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MoviesService } from "../../services/movies.service";
+import { ConfigService } from "../../services/config.service";
 import { first } from "rxjs/operators";
 import { Menu } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
@@ -14,7 +15,7 @@ export type Movie = {
   created: number;
   duration: number;
   pid: string;
-  viewers: number;
+  viewers: number | string;
   avgCompletionRate: number;
   minutesViewed: number;
   owner: string;
@@ -37,13 +38,15 @@ export class MoviesComponent implements OnInit {
   @ViewChild('actionsmenu', { static: true }) private actionsMenu: Menu | undefined;
 
   public movies: Movie[] = [];
+  public bugs: string[] | null = null;
   public totals: Totals = null;
   public isBusy = false;
   public isAdmin = false;
+  public showDuration = true;
 
   public actions: MenuItem[] = [
-    {label: 'View Details', command: (event) => {this.actionSelected("view");}},
-    {label: 'Delete', styleClass: 'kDanger', command: (event) => {this.actionSelected("delete");}}
+    {label: 'View Details', styleClass: this.bugs?.indexOf('graphics') !== -1 ? 'graphicsBug' : '', command: (event) => {this.actionSelected("view");}},
+    {label: 'Delete', styleClass: this.bugs?.indexOf('graphics') !== -1 ? 'kDanger graphicsBug' : 'kDanger', command: (event) => {this.actionSelected("delete");}}
   ];
 
   public showMovieDetails = false;
@@ -51,6 +54,7 @@ export class MoviesComponent implements OnInit {
   public selectedMovie: Movie | null = null;
 
   constructor(private moviesService: MoviesService,
+              private configService: ConfigService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -63,11 +67,39 @@ export class MoviesComponent implements OnInit {
         // update plays distribution
         // @ts-ignore
         this.movies.forEach(movie => movie.playsDistribution = Number((movie.plays / this.totals.plays * 100).toFixed(2)));
-        this.isBusy = false;
+        this.checkLoaded();
       },
       error => {
         console.error(`Error connecting to Firestore: ${error}`);
       });
+    this.configService.getConfig().pipe(first()).subscribe(
+      result => {
+        this.bugs = result[0].bugTypes && result[0].bugTypes.length ? result[0].bugTypes : [];
+        this.checkLoaded();
+      },
+      error => {
+        console.error(`Error connecting to Firestore: ${error}`);
+      });
+  }
+
+  private checkLoaded(): void {
+    if (this.bugs !== null && this.movies.length) {
+      this.isBusy = false;
+      // apply functionality bugs
+      if (this.bugs.indexOf('functionality') > -1) {
+        this.movies[8].id = '1234';
+        this.movies.forEach(movie => movie.viewers =  movie.viewers.toString());
+      }
+      // apply data bugs
+      if (this.bugs.indexOf('data') > -1 && this.totals) {
+        this.movies.forEach(movie => movie.playsDistribution = Number((movie.plays / (this.totals as any).plays * 100).toFixed(0)));
+        this.totals.viewers = 784;
+        this.movies[7].avgCompletionRate = 103;
+      }
+      // apply cross browser bugs
+      const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+      this.showDuration = !(isFirefox && this.bugs?.indexOf('browser') !== -1);
+    }
   }
 
   openActionsMenu(event: any, movie: Movie): void{
@@ -88,8 +120,8 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-  public drillDown(movie: Movie | null): void {
-    if (movie) {
+  public drillDown(movie: Movie | null, fromTable = false): void {
+    if (movie && !(this.bugs && this.bugs.indexOf('functionality') > -1 && fromTable)) {
       this.selectedMovie = movie;
       this.showMovieDetails = true;
     }

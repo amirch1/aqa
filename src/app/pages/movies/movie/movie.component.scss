@@ -54,12 +54,18 @@
     background-color: black;
     border-radius: 4px;
     overflow: hidden;
+    &.responsiveBug {
+      flex: 0 0 auto;
+    }
   }
   .rows {
     flex: 0 0 auto;
     height: 346px;
     overflow-y: hidden;
     overflow-x: hidden;
+    &.responsiveBug {
+      flex: 1 1 auto;
+    }
     .row {
       margin-top: 24px;
       display: flex;
@@ -119,6 +125,7 @@
 
   .footer {
     border-top: 1px solid $kGrayscale4;
+    background-color: white;
     display: flex;
     align-items: center;
     padding-left: 24px;
@@ -142,35 +149,35 @@
   }
 }
 @media screen and (max-height: 820px) {
-  .movieContainer {
+  .movieContainer:not(.responsiveBug) {
     .movieFrame {
       width: 600px;
     }
   }
 }
 @media screen and (max-height: 700px) {
-  .movieContainer {
+  .movieContainer:not(.responsiveBug) {
     .movieFrame {
       width: 460px;
     }
   }
 }
 @media screen and (max-height: 600px) {
-  .movieContainer {
+  .movieContainer:not(.responsiveBug) {
     .movieFrame {
       width: 280px;
     }
   }
 }
 @media screen and (max-height: 550px) {
-  .movieContainer {
+  .movieContainer:not(.responsiveBug) {
     .movieFrame {
       width: 160px;
     }
   }
 }
 @media screen and (max-height: 500px) {
-  .movieContainer {
+  .movieContainer:not(.responsiveBug) {
     .movieFrame {
       display: none;
     }

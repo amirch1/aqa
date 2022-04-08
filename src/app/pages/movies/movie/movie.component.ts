@@ -21,7 +21,7 @@ export class MovieComponent {
   @Input() set show(value: boolean) {
     this._show = value;
     if (value) {
-      if (this._movie) {
+      if (this._movie && this.bugs?.indexOf('functionality') === -1) {
         this.movieName = this._movie.name;
         this.description = this._movie.description;
       }
@@ -29,6 +29,12 @@ export class MovieComponent {
         this.showMovie = true;
       }, 500);
     }
+  }
+
+  @Input() set bugs(value: string[] |  null) {
+    this._bugs = value;
+    this.preventDisable = this._bugs?.indexOf('functionality') !== -1;
+    this.displayErrors = this._bugs?.indexOf('ux') === -1;
   }
 
   @Output() onClose = new EventEmitter();
@@ -41,6 +47,9 @@ export class MovieComponent {
   public _movie: Movie | undefined;
   public movieName = '';
   public description = '';
+  public preventDisable = false;
+  public _bugs: string[] |  null = [];
+  public displayErrors = true;
 
   constructor(private sanitizer: DomSanitizer) {
   }

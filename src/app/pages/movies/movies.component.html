@@ -3,30 +3,30 @@
   <i *ngIf="isAdmin" (click)="openSettings()" class="settingsIcon"></i>
   <span class="logout" [class.user]="!isAdmin" (click)="logout()">Logout</span>
 </div>
-<div class="content">
+<div class="content" [class.responsiveBug]="bugs && bugs.indexOf('responsive') !== -1">
   <div class="totals">
     <div class="total">
-      <div class="kMiniIcon purple"><i class="icon-small-video"></i></div>
+      <div class="kMiniIcon purple" [class.lightgreen]="bugs && bugs.indexOf('graphics') !== -1"><i class="icon-small-video"></i></div>
       <span class="value">{{totals?.entries | number: '1.0'}}</span>
       <span class="label">Videos</span>
     </div>
     <div class="total">
-      <div class="kMiniIcon blue"><i class="icon-small-play"></i></div>
-      <span class="value">{{totals?.plays | number: '1.0'}}</span>
+      <div class="kMiniIcon blue" [class.green]="bugs && bugs.indexOf('graphics') !== -1"><i class="icon-small-play"></i></div>
+      <span class="value">{{bugs && bugs.indexOf('ux') !== -1 ? totals?.plays : totals?.plays | number: '1.0'}}</span>
       <span class="label">Plays</span>
     </div>
     <div class="total">
-      <div class="kMiniIcon green"><i class="icon-small-viewer-contributor"></i></div>
+      <div class="kMiniIcon green" [class.lightgreen]="bugs && bugs.indexOf('graphics') !== -1"><i class="icon-small-viewer-contributor"></i></div>
       <span class="value">{{totals?.viewers | number: '1.0'}}</span>
       <span class="label">Viewers</span>
     </div>
     <div class="total">
-      <div class="kMiniIcon orange"><i class="icon-small-time"></i></div>
-      <span class="value">{{totals?.minutesViewed | number: '1.2'}}</span>
+      <div class="kMiniIcon orange" [class.aqua]="bugs && bugs.indexOf('graphics') !== -1"><i class="icon-small-time"></i></div>
+      <span class="value">{{bugs && bugs.indexOf('ux') !== -1 ? totals?.minutesViewed : totals?.minutesViewed | number: '1.2'}}</span>
       <span class="label">Minutes Viewed</span>
     </div>
     <div class="total">
-      <div class="kMiniIcon lightgreen"><i class="icon-small-Completion-Rate"></i></div>
+      <div class="kMiniIcon lightgreen" [class.orange]="bugs && bugs.indexOf('graphics') !== -1"><i class="icon-small-Completion-Rate"></i></div>
       <span class="value">{{totals?.avgCompletionRate | number: '1.2'}}%</span>
       <span class="label">Avg. Completion Rate</span>
     </div>
@@ -67,14 +67,14 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-movie>
-        <tr class="kTopVideoRow">
+        <tr class="kTopVideoRow" [class.graphicsBug]="bugs && bugs.indexOf('graphics') !== -1">
           <td [ngStyle]="{'width': '155px', 'padding-left': '24px', 'position': 'relative'}">
-            <thumb-loader [thumbnailUrl]="'https://www.kaltura.com/p/'+movie['pid']+'/sp/'+movie['pid']+'00/thumbnail/entry_id/'+movie['id']+'/width/128/height/72'" [width]="128" [height]="72"></thumb-loader>
-            <span class="duration">{{movie['duration'] | duration}}</span>
+            <thumb-loader *ngIf="!isBusy" [thumbnailUrl]="'https://www.kaltura.com/p/'+movie['pid']+'/sp/'+movie['pid']+'00/thumbnail/entry_id/'+movie['id']+'/width/128/height/72'" [width]="128" [height]="72"></thumb-loader>
+            <span *ngIf="showDuration" class="duration">{{movie['duration'] | duration}}</span>
           </td>
           <td [ngStyle]="{'width': '100%', 'padding-left': 24}">
-            <div class="kTopVideoEntryColumn" (click)="drillDown(movie)">
-              <span class="kTableColumn kEntryName">{{movie['name']}}</span>
+            <div class="kTopVideoEntryColumn" (click)="drillDown(movie, true)">
+              <span class="kTableColumn kEntryName" [ngClass]="{'uxBug': bugs && bugs.indexOf('ux') !== -1, 'graphicsBug': bugs && bugs.indexOf('graphics') !== -1}">{{movie['name']}}</span>
               <div class="kEntryDetails">
                 <span class="kTableColumn">
                   By: {{movie['owner']}}
@@ -90,7 +90,7 @@
           </td>
           <td>
             <div class="kTableCell">
-              <app-bullet [value]="movie['playsDistribution']"></app-bullet>
+              <app-bullet [class.responsiveBug]="bugs && bugs.indexOf('responsive') !== -1" [value]="movie['playsDistribution']"></app-bullet>
             </div>
           </td>
           <td>
@@ -108,7 +108,7 @@
           <td>
             <div class="kTableCell">
               <i class="icon-small-Completion-Rate"></i>
-              <span class="kCellValue">{{movie['avgCompletionRate']}}%</span>&nbsp;
+              <span class="kCellValue">{{movie['avgCompletionRate']}}{{bugs && bugs.indexOf('graphics') !== -1 ? '' : '%'}}</span>&nbsp;
             </div>
           </td>
           <td  [ngStyle]="{'width':'80px'}">
@@ -135,6 +135,6 @@
 
 <p-menu #actionsmenu [popup]="true" [model]="actions" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
 
-<app-movie [movie]="selectedMovie" [show]="showMovieDetails" (onClose)="showMovieDetails=false" (onDelete)="delete()"></app-movie>
+<app-movie [movie]="selectedMovie" [show]="showMovieDetails" [bugs]="bugs" (onClose)="showMovieDetails=false" (onDelete)="delete()"></app-movie>
 
 <app-settings [show]="showSettings" (onClose)="showSettings=false"></app-settings>

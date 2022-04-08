@@ -475,6 +475,9 @@ p-table {
   .p-menuitem.kDanger .p-menuitem-text{
     color: $kDandger;
   }
+  .p-menuitem.graphicsBug .p-menuitem-text{
+    font-size: 16px;
+  }
 }
 body .p-tieredmenu {
   width: 250px;
