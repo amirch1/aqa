@@ -91,7 +91,7 @@ export class MoviesComponent implements OnInit {
       }
       // apply data bugs
       if (this.bugs.indexOf('data') > -1 && this.totals) {
-        this.movies.forEach(movie => movie.playsDistribution = Number((movie.plays / (this.totals as any).plays * 100).toFixed(0)));
+        this.movies[0].playsDistribution = 54.3;
         this.totals.viewers = 784;
         this.movies[7].avgCompletionRate = 103;
       }
