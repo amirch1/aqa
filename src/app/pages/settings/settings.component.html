@@ -14,6 +14,7 @@
       <p-checkbox [disabled]="showBugs==='no'" name="categories" value="ux" label="User experience" [(ngModel)]="selectedBugs"></p-checkbox>
       <p-checkbox [disabled]="showBugs==='no'" name="categories" value="responsive" label="Responsiveness" [(ngModel)]="selectedBugs"></p-checkbox>
       <p-checkbox [disabled]="showBugs==='no'" name="categories" value="browser" label="Cross-browser compatibility" [(ngModel)]="selectedBugs"></p-checkbox>
+      <p-checkbox [disabled]="showBugs==='no'" name="categories" value="system" label="System Down" [(ngModel)]="selectedBugs"></p-checkbox>
       <div class="kLoader" *ngIf="!showBugs.length">
         <div class="spinner-container">
           <div class='spinner'><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>

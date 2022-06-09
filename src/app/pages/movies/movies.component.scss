@@ -34,6 +34,28 @@
   padding-left: 120px;
   padding-right: 120px;
   box-sizing: border-box;
+  .systemMessage {
+    background-color: white;
+    margin-top: 100px;
+    height: 240px;
+    border: 1px solid #999999;
+    border-radius: 8px;
+    text-align: center;
+    padding: 48px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333333;
+    }
+    .message {
+      font-size: 18px;
+      color: #999999;
+      margin-top: 24px;
+    }
+  }
   .totals {
     width: 100%;
     height: 136px;

@@ -3,7 +3,13 @@
   <i *ngIf="isAdmin" (click)="openSettings()" class="settingsIcon"></i>
   <span class="logout" [class.user]="!isAdmin" (click)="logout()">Logout</span>
 </div>
-<div class="content" [class.responsiveBug]="bugs && bugs.indexOf('responsive') !== -1">
+<div class="content" *ngIf="!isBusy && systemDown">
+  <div class="systemMessage">
+    <span class="title">System is currently down for maintenance...</span>
+    <span class="message">Please try again later</span>
+  </div>
+</div>
+<div class="content" [class.responsiveBug]="bugs && bugs.indexOf('responsive') !== -1" *ngIf="!isBusy && !systemDown">
   <div class="totals">
     <div class="total">
       <div class="kMiniIcon purple" [class.lightgreen]="bugs && bugs.indexOf('graphics') !== -1"><i class="icon-small-video"></i></div>

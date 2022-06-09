@@ -43,6 +43,7 @@ export class MoviesComponent implements OnInit {
   public isBusy = false;
   public isAdmin = false;
   public showDuration = true;
+  public systemDown = false;
 
   public actions: MenuItem[] = [
     {label: 'View Details', command: (event) => {this.actionSelected("view");}},
@@ -84,6 +85,7 @@ export class MoviesComponent implements OnInit {
 
   private applyBugs(): void {
     if (this.bugs !== null) {
+      this.systemDown = this.bugs.indexOf('system') > -1;
       // apply functionality bugs
       if (this.bugs.indexOf('functionality') > -1) {
         this.movies[8].id = '1234';
@@ -120,8 +122,8 @@ export class MoviesComponent implements OnInit {
 
   private checkLoaded(): void {
     if (this.bugs !== null && this.movies.length) {
-      this.isBusy = false;
       this.applyBugs();
+      this.isBusy = false;
     }
   }
 
