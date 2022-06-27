@@ -15,6 +15,7 @@ export class ConfigService {
   }
 
   setConfig(bugTypes: string[]): void {
-    this.firestore.collection('admin').doc('adminFields').set({bugTypes})
+    const path = sessionStorage.getItem('aqaUser') === 'aqa_admin' ? 'adminFields' : 'kalturaAdminFields';
+    this.firestore.collection('admin').doc(path).set({bugTypes})
   }
 }

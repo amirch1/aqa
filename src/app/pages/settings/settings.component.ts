@@ -1,7 +1,7 @@
-import {Output, Component, Input, EventEmitter, OnInit} from '@angular/core';
-import {ConfigService} from "../../services/config.service";
-import {MessageService} from "primeng/api";
-import {first} from "rxjs/operators";
+import { Output, Component, Input, EventEmitter, OnInit } from '@angular/core';
+import { ConfigService } from "../../services/config.service";
+import { MessageService } from "primeng/api";
+import { first } from "rxjs/operators";
 
 @Component({
   selector: 'app-settings',
@@ -38,8 +38,9 @@ export class SettingsComponent implements OnInit{
   private loadSettings(): void {
     this.configService.getConfig().pipe(first()).subscribe(
       result => {
-        this.showBugs = result[0].bugTypes && result[0].bugTypes.length ? 'yes' : 'no';
-        this.selectedBugs = result[0].bugTypes && result[0].bugTypes.length ? result[0].bugTypes : [];
+        const data = (sessionStorage.getItem('aqaUser') as string).indexOf('aqa') === 0  ? result[0] : result[1];
+        this.showBugs = data && data.bugTypes && data.bugTypes.length ? 'yes' : 'no';
+        this.selectedBugs = data && data.bugTypes && data.bugTypes.length ? data.bugTypes : [];
       },
       error => {
         console.error(`Error connecting to Firestore: ${error}`);

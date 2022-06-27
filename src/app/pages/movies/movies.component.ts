@@ -60,7 +60,7 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isBusy = true;
-    this.isAdmin = sessionStorage.getItem('aqaUser') === 'aqa_admin';
+    this.isAdmin = sessionStorage.getItem('aqaUser') === 'aqa_admin' || sessionStorage.getItem('aqaUser') === 'kaltura_admin';
     this.moviesService.getMovies().pipe(first()).subscribe(
       result => {
         this.movies = result[0].entries;
@@ -75,7 +75,8 @@ export class MoviesComponent implements OnInit {
       });
     this.configService.getConfig().pipe(first()).subscribe(
       result => {
-        this.bugs = result[0].bugTypes && result[0].bugTypes.length ? result[0].bugTypes : [];
+        const data = (sessionStorage.getItem('aqaUser') as string).indexOf('aqa') === 0 ? result[0] : result[1];
+        this.bugs = data.bugTypes && data.bugTypes.length ? data.bugTypes : [];
         this.checkLoaded();
       },
       error => {
